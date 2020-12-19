@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 
-export default function department({ reviews }) {
+export default function professor({ reviews }) {
   const router = useRouter();
   const professorName = router.query.id;
   const seoDescription = `Reviews of courses taught by professor ${professorName} at UBC `;
@@ -17,7 +17,8 @@ export default function department({ reviews }) {
 
   return (
     <>
-      <NextSeo
+      <h1>This page is not yet avaiable</h1>
+      {/* <NextSeo
         title={seoTitle}
         description={seoDescription}
         openGraph={{
@@ -39,7 +40,7 @@ export default function department({ reviews }) {
             </Typography>
           )}
         </Box>
-      </Container>
+      </Container> */}
     </>
   );
 }
