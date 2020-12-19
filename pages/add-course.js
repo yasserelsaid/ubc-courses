@@ -53,7 +53,10 @@ export default function addCourse() {
     const spamPreventionAdjusted = spamPrevention
       .replace(/\s/g, '')
       .toLowerCase();
-    if (spamPreventionAdjusted !== 'britishcolumbia') {
+    if (
+      spamPreventionAdjusted !== 'britishcolumbia' &&
+      spamPreventionAdjusted !== 'bc'
+    ) {
       setSpamPrevention('');
       return setError('Wrong Province');
     }
