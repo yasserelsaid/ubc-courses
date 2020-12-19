@@ -152,7 +152,8 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
     const spamPreventionAdjusted = spamPrevention
       .replace(/\s/g, '')
       .toLowerCase();
-    if (spamPreventionAdjusted !== 'britishcolombia') {
+
+    if (spamPreventionAdjusted !== 'britishcolumbia') {
       setSpamPrevention('');
       return setError('Wrong Province');
     }
