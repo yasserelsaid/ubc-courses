@@ -381,7 +381,7 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
                       required
                       multiline
                       variant='outlined'
-                      label='In what province is UBC U?'
+                      label='In what province is UBC?'
                       color='secondary'
                       name='spamPrevention'
                       value={spamPrevention}
