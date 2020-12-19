@@ -153,7 +153,10 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
       .replace(/\s/g, '')
       .toLowerCase();
 
-    if (spamPreventionAdjusted !== 'britishcolumbia') {
+    if (
+      spamPreventionAdjusted !== 'britishcolumbia' &&
+      spamPreventionAdjusted !== 'bc'
+    ) {
       setSpamPrevention('');
       return setError('Wrong Province');
     }
