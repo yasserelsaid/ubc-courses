@@ -5,7 +5,7 @@ function top() {
   return (
     <div>
       <Typography variant='h4' component='h1' gutterBottom align='center'>
-        Course Reviews @ York University
+        Course Reviews @ UBC
       </Typography>
       <Typography variant='h5' component='h2' gutterBottom align='center'>
         Know Your Courses

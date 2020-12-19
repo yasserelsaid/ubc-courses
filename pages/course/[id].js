@@ -18,7 +18,7 @@ export default function course({ course }) {
   const courseName = course && course.name;
   const [reviews, setReviews] = useState(reviewsInitialState);
 
-  const seoDescription = `Reviews of course ${courseIdName} ( ${courseName} ) at York University`;
+  const seoDescription = `Reviews of course ${courseIdName} ( ${courseName} ) at UBC `;
 
   return (
     <>
@@ -27,10 +27,10 @@ export default function course({ course }) {
         description={seoDescription}
         openGraph={{
           type: 'website',
-          url: 'https://yorkcourses.com/',
+          url: 'https://UBCcourses.com/',
           title: courseIdName,
           description: seoDescription,
-          site_name: 'York Course Reviews',
+          site_name: 'UBC Course Reviews',
         }}
       />
       <Container maxWidth='md'>

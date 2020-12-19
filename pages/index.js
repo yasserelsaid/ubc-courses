@@ -14,13 +14,13 @@ export default function Index({ depts, profs }) {
   return (
     <>
       <NextSeo
-        title='York Course Reviews'
-        description='York Courses is the place to see reviews and ratings of courses and professors at York University'
+        title='UBC Course Reviews'
+        description='UBC Courses is the place to see reviews and ratings of courses and professors at UBC '
         openGraph={{
-          url: 'https://yorkcourses.com/',
-          title: 'York Courses',
-          description: 'York University Course Reviews and Ratings',
-          site_name: 'York Course Reviews',
+          url: 'https://UBCcourses.com/',
+          title: 'UBC Courses',
+          description: 'UBC  Course Reviews and Ratings',
+          site_name: 'UBC Course Reviews',
         }}
       />
       <Container maxWidth='sm'>

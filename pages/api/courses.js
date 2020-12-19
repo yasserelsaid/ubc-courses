@@ -18,7 +18,7 @@ export default async (req, res) => {
 };
 async function handlePostRequests(req, res) {
   try {
-    const { idName, name, creditHours } = req.body;
+    const { idName, name } = req.body;
     const deptCode = idName.split(' ')[0];
     const id = idName.replace(/\s/g, '');
 
@@ -26,7 +26,6 @@ async function handlePostRequests(req, res) {
       id,
       idName,
       name,
-      creditHours,
       deptCode,
     }).save();
 

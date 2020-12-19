@@ -51,7 +51,7 @@ export default function MyApp({ Component, pageProps }) {
     <React.Fragment>
       <DefaultSeo {...SEO} />
       <Head>
-        <title>York Courses</title>
+        <title>UBC Courses</title>
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'

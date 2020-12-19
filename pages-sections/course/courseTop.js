@@ -18,9 +18,6 @@ function courseTop({ course }) {
       <Typography variant='h5' component='h2' gutterBottom>
         {course.name}
       </Typography>
-      <Typography variant='subtitle1' component='p' gutterBottom>
-        Credit Hours: {course.creditHours}
-      </Typography>
     </div>
   );
 }

@@ -37,7 +37,7 @@ function inputs({ depts, profs }) {
             label='Enter Course ID'
             color='secondary'
             variant='outlined'
-            helperText='e.g. EECS 1012'
+            helperText='e.g. CPSC 221'
             onChange={handleChange}
             value={course}
           />

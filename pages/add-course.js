@@ -28,7 +28,6 @@ export default function addCourse() {
 
   const [idName, setIdName] = useState('');
   const [name, setName] = useState('');
-  const [creditHours, setCreditHours] = useState('');
   const [spamPrevention, setSpamPrevention] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,9 +39,8 @@ export default function addCourse() {
     if (!/\d/.test(idName)) {
       setIdName('');
       setName('');
-      setCreditHours('');
       setSpamPrevention('');
-      return setError('Course Id should be formatted like this EECS 1012');
+      return setError('Course Id should be formatted like this CPSC 221');
     }
     let idNameWithSpace = idName;
 
@@ -55,17 +53,11 @@ export default function addCourse() {
     const spamPreventionAdjusted = spamPrevention
       .replace(/\s/g, '')
       .toLowerCase();
-    if (spamPreventionAdjusted !== 'ontario') {
+    if (spamPreventionAdjusted !== 'britishcolumbia') {
       setSpamPrevention('');
       return setError('Wrong Province');
     }
-    if (creditHours < 1) {
-      setIdName('');
-      setName('');
-      setCreditHours('');
-      setSpamPrevention('');
-      return setError('Wrong Province');
-    }
+
     try {
       setLoading(true);
       setSuccess(false);
@@ -75,13 +67,11 @@ export default function addCourse() {
       const payload = {
         idName: idNameWithSpace.toUpperCase(),
         name,
-        creditHours,
       };
       await axios.post(url, payload);
       setSuccess(true);
       setIdName('');
       setName('');
-      setCreditHours('');
       setSpamPrevention('');
       // setTimeout(
       //   () => router.push(`/course/${idName.toUpperCase().replace(/\s/g, '')}`),
@@ -91,7 +81,6 @@ export default function addCourse() {
       console.log(err);
       setIdName('');
       setName('');
-      setCreditHours('');
       setSpamPrevention('');
       catchErrors(err, setError);
     } finally {
@@ -103,7 +92,7 @@ export default function addCourse() {
     <>
       <NextSeo
         title='Add a Course'
-        description='Add a course to be reviewed by other students at York University'
+        description='Add a course to be reviewed by other students at UBC'
       />
       <Container maxWidth='sm'>
         <Box my={4} alignItems='center'>
@@ -118,7 +107,7 @@ export default function addCourse() {
                 label='Enter Course ID'
                 color='secondary'
                 variant='outlined'
-                helperText='e.g. EECS 1012'
+                helperText='e.g. CPSC 221'
                 name='idName'
                 value={idName}
                 onChange={e => setIdName(e.target.value)}
@@ -136,25 +125,12 @@ export default function addCourse() {
                 onChange={e => setName(e.target.value)}
               />
             </div>
-            <div className={classes.input}>
-              <TextField
-                required
-                fullWidth
-                label='Credit Hours'
-                color='secondary'
-                variant='outlined'
-                type='number'
-                name='creditHours'
-                value={creditHours}
-                onChange={e => setCreditHours(e.target.value)}
-                // InputProps={{ inputProps: { min: 0, max: 12 } }}
-              />
-            </div>
+
             <div className={classes.input}>
               <TextField
                 fullWidth
                 required
-                label='In what province is York U?'
+                label='In what province is UBC?'
                 color='secondary'
                 variant='outlined'
                 name='spamPrevention'

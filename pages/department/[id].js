@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 export default function department({ courses }) {
   const router = useRouter();
   const deptCode = router.query.id;
-  const seoDescription = `Reviews of courses from ${deptCode} department at York University`;
+  const seoDescription = `Reviews of courses from ${deptCode} department at UBC `;
   const seoTitle = `${deptCode} Reviews`;
 
   return (
@@ -21,10 +21,10 @@ export default function department({ courses }) {
         description={seoDescription}
         openGraph={{
           type: 'website',
-          url: 'https://yorkcourses.com/',
+          url: 'https://UBCcourses.com/',
           title: seoTitle,
           description: seoDescription,
-          site_name: 'York Course Reviews',
+          site_name: 'UBC Course Reviews',
         }}
       />
       <Container maxWidth='md'>

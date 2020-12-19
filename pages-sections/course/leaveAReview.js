@@ -152,7 +152,7 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
     const spamPreventionAdjusted = spamPrevention
       .replace(/\s/g, '')
       .toLowerCase();
-    if (spamPreventionAdjusted !== 'ontario') {
+    if (spamPreventionAdjusted !== 'britishcolombia') {
       setSpamPrevention('');
       return setError('Wrong Province');
     }
@@ -377,7 +377,7 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
                       required
                       multiline
                       variant='outlined'
-                      label='In what province is York U?'
+                      label='In what province is UBC U?'
                       color='secondary'
                       name='spamPrevention'
                       value={spamPrevention}

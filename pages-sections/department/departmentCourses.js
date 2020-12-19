@@ -31,18 +31,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function createData(id, name, numberOfRatings, rating) {
-  return { id, name, numberOfRatings, rating };
-}
-
-const rows = [
-  createData('EECS 1012', 'Introduction to computing', 10, 5.0),
-  createData('EECS 1022', 'Java Programming', 3, 4.2),
-  createData('EECS 2001', 'Theory of computation', 9, 2.9),
-  createData('EECS 2021', 'Computer Organization', 0, 0),
-  createData('EECS 2031', 'Software tools', 2, 2),
-];
-
 function departmentCourses({ courses }) {
   const classes = useStyles();
   return (
