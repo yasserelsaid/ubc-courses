@@ -76,10 +76,10 @@ function inputs({ depts, profs }) {
           ))}
         </Autocomplete>
       </div>
-      <Typography variant='h5' component='h1' gutterBottom align='center'>
+      {/* <Typography variant='h5' component='h1' gutterBottom align='center'>
         OR
       </Typography>
-      <div className={classes.input}>
+       <div className={classes.input}>
         <Autocomplete
           getOptionLabel={prof => prof}
           options={profs}
@@ -94,13 +94,14 @@ function inputs({ depts, profs }) {
             />
           )}
         >
-          {profs.map(prof => (
-            <MenuItem key={prof} value={prof}>
-              {prof}
-            </MenuItem>
-          ))}
+          {profs &&
+            profs.map(prof => (
+              <MenuItem key={prof} value={prof}>
+                {prof}
+              </MenuItem>
+            ))}
         </Autocomplete>
-      </div>
+      </div> */}
     </div>
   );
 }
