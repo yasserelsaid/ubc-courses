@@ -45,59 +45,59 @@ export default function professor({ reviews }) {
   );
 }
 
-export const getStaticPaths = async () => {
-  connectDb();
+// export const getStaticPaths = async () => {
+//   connectDb();
 
-  const professors = await Course.find().distinct('reviews.professorName');
+//   const professors = await Course.find().distinct('reviews.professorName');
 
-  const paths = professors.map(prof => ({
-    params: { id: prof },
-  }));
+//   const paths = professors.map(prof => ({
+//     params: { id: prof },
+//   }));
 
-  return {
-    paths,
-    fallback: true,
-  };
-};
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// };
 
-export const getStaticProps = async ctx => {
-  try {
-    connectDb();
-    const { params } = ctx;
-    const { id } = params;
-    console.log(id);
-    const courses = await Course.find({
-      'reviews.professorName': id,
-    });
+// export const getStaticProps = async ctx => {
+//   try {
+//     connectDb();
+//     const { params } = ctx;
+//     const { id } = params;
+//     console.log(id);
+//     const courses = await Course.find({
+//       'reviews.professorName': id,
+//     });
 
-    const arrayOfReviewArrays = courses.map(course => {
-      const courseIdName = course.idName;
-      console.log(course);
-      const profReviews = course.reviews.filter(
-        review => review.professorName === id
-      );
-      return profReviews.map(review => ({
-        ...review._doc,
-        courseIdName,
-      }));
-    });
-    // flatten reviews
-    const reviews = [].concat.apply([], arrayOfReviewArrays);
-    console.log(reviews);
+//     const arrayOfReviewArrays = courses.map(course => {
+//       const courseIdName = course.idName;
+//       console.log(course);
+//       const profReviews = course.reviews.filter(
+//         review => review.professorName === id
+//       );
+//       return profReviews.map(review => ({
+//         ...review._doc,
+//         courseIdName,
+//       }));
+//     });
+//     // flatten reviews
+//     const reviews = [].concat.apply([], arrayOfReviewArrays);
+//     console.log(reviews);
 
-    return {
-      props: {
-        reviews: JSON.parse(JSON.stringify(reviews)),
-      },
-      revalidate: 20,
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      props: {
-        reviews: [],
-      },
-      revalidate: 60,
-    };
-  }
-};
+//     return {
+//       props: {
+//         reviews: JSON.parse(JSON.stringify(reviews)),
+//       },
+//       revalidate: 20,
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return {
+//       props: {
+//         reviews: [],
+//       },
+//       revalidate: 60,
+//     };
+//   }
+// };
