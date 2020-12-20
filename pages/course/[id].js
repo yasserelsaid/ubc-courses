@@ -95,7 +95,7 @@ export const getStaticProps = async ctx => {
       props: {
         course: JSON.parse(JSON.stringify(course)),
       },
-      revalidate: 5,
+      revalidate: 2,
     };
   } catch (err) {
     console.log(err);
