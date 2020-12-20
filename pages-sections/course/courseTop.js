@@ -8,15 +8,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function courseTop({ course }) {
+function courseTop({ courseIdName, courseName }) {
   const classes = useStyles();
   return (
     <div className={classes.top}>
       <Typography variant='h4' component='h1' gutterBottom>
-        {course.idName}
+        {courseIdName}
       </Typography>
       <Typography variant='h5' component='h2' gutterBottom>
-        {course.name}
+        {courseName}
       </Typography>
     </div>
   );

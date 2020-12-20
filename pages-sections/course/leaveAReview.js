@@ -132,9 +132,9 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
     advice,
   } = review;
   const deviceId = cookie.get('deviceId');
-  useEffect(() => {
-    setIsReviewedByUser(reviewedBy.includes(deviceId));
-  }, []);
+  // useEffect(() => {
+  //   setIsReviewedByUser(reviewedBy.includes(deviceId));
+  // }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -182,7 +182,7 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
       setSuccess(true);
       setReview(InitialReview);
       setSpamPrevention('');
-      setIsReviewedByUser(true);
+      // setIsReviewedByUser(true);
     } catch (err) {
       catchErrors(err, setError);
     } finally {

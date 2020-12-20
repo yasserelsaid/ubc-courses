@@ -5,6 +5,9 @@ connectDb();
 
 export default async (req, res) => {
   switch (req.method) {
+    case 'GET':
+      await handleGetRequests(req, res);
+      break;
     case 'POST':
       await handlePostRequests(req, res);
       break;
@@ -16,6 +19,33 @@ export default async (req, res) => {
       res.status(405).send(`Method ${req.method} not allowed`);
   }
 };
+
+async function handleGetRequests(req, res) {
+  try {
+    connectDb();
+    const { id } = req.query;
+    console.log(id);
+
+    const course = await Course.findOne({ id });
+
+    course &&
+      course.reviews.sort((a, b) =>
+        a.upVotedBy.length - a.downVotedBy.length >
+        b.upVotedBy.length - b.downVotedBy.length
+          ? -1
+          : b.upVotedBy.length - b.downVotedBy.length >
+            a.upVotedBy.length - a.downVotedBy.length
+          ? 1
+          : 0
+      );
+
+    res.status(200).json({ course });
+  } catch (err) {
+    console.log(err);
+    res.status(403).send(err.message);
+  }
+}
+
 async function handlePostRequests(req, res) {
   try {
     const { idName, name } = req.body;
@@ -35,6 +65,7 @@ async function handlePostRequests(req, res) {
     res.status(403).send(err.message);
   }
 }
+
 async function handlePutRequests(req, res) {
   try {
     const { review, id, deviceId } = req.body;
