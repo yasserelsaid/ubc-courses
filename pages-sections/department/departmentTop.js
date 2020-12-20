@@ -15,7 +15,7 @@ function departmentTop() {
   return (
     <div className={classes.top}>
       <Typography variant='h4' component='h1' gutterBottom>
-        {router.query.id} Courses
+        {router.query.id || 'Most Reviewed'} Courses
       </Typography>
     </div>
   );

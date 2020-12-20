@@ -6,6 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 const useStyles = makeStyles(theme => ({
   iContainer: {
     margin: '50px',
@@ -76,6 +78,17 @@ function inputs({ depts, profs }) {
           ))}
         </Autocomplete>
       </div>
+      <Typography variant='h5' component='h1' gutterBottom align='center'>
+        OR
+      </Typography>
+
+      <Typography variant='h5' component='h1' gutterBottom align='center'>
+        Take a look at the{' '}
+        <Link href='/most-reviewed'>
+          <a>most reviewed courses</a>
+        </Link>
+      </Typography>
+
       {/* <Typography variant='h5' component='h1' gutterBottom align='center'>
         OR
       </Typography>
