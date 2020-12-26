@@ -178,6 +178,7 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
       };
 
       const { data } = await axios.put(url, payload);
+      console.log(data.newReviews);
       setReviews(data.newReviews);
       setSuccess(true);
       setReview(InitialReview);

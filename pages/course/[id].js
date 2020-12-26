@@ -8,61 +8,64 @@ import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-import axios from 'axios';
+// import axios from 'axios';
+import Course from '../../models/Course';
+import connectDb from '../../utils/connectDb';
 
-export default function course() {
+export default function course({ course }) {
   const router = useRouter();
-  const [courseIdName, setCourseIdName] = useState('');
-  const [courseName, setCourseName] = useState('');
-  const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [courseIdName, setCourseIdName] = useState('');
+  // const [courseName, setCourseName] = useState('');
+  const [reviews, setReviews] = useState(course.reviews);
+  // const [loading, setLoading] = useState(true);
   const id = router.query.id;
 
-  async function getCourseInfo() {
-    setLoading(true);
-    if (!id) return;
-    try {
-      const url = '/api/courses';
-      const payload = {
-        params: { id },
-      };
-      const { data } = await axios.get(url, payload);
-      setCourseIdName(data.course.idName);
-      setCourseName(data.course.name);
-      setReviews(data.course.reviews);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }
+  // async function getCourseInfo() {
+  //   setLoading(true);
+  //   if (!id) return;
+  //   try {
+  //     const url = '/api/courses';
+  //     const payload = {
+  //       params: { id },
+  //     };
+  //     const { data } = await axios.get(url, payload);
+  //     setCourseIdName(data.course.idName);
+  //     setCourseName(data.course.name);
+  //     setReviews(data.course.reviews);
+  //   } catch (err) {
+  //     console.log(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    getCourseInfo();
-  }, [id]);
+  // useEffect(() => {
+  //   getCourseInfo();
+  // }, [id]);
 
-  const seoDescription = `Reviews of course ${courseIdName} ( ${courseName} ) at UBC `;
+  const seoDescription = `Reviews of course ${course.idName} ( ${course.name} ) at UBC `;
 
   return (
     <>
       <NextSeo
-        title={courseIdName}
+        title={course.idName}
         description={seoDescription}
         openGraph={{
           type: 'website',
           url: 'https://UBCcourses.com/',
-          title: courseIdName,
+          title: course.idName,
           description: seoDescription,
           site_name: 'UBC Course Reviews',
         }}
       />
       <Container maxWidth='md'>
         <Box my={4} alignItems='center'>
-          {loading ? (
-            <h1>LOADING...</h1>
-          ) : courseIdName ? (
+          {course.idName ? (
             <>
-              <CourseTop courseIdName={courseIdName} courseName={courseName} />
+              <CourseTop
+                courseIdName={course.idName}
+                courseName={course.name}
+              />
               <Reviews reviews={reviews} />
               <LeaveAReview
                 reviewedBy={course.reviewedBy}
@@ -83,6 +86,39 @@ export default function course() {
     </>
   );
 }
+
+export const getServerSideProps = async ctx => {
+  try {
+    connectDb();
+    const { params } = ctx;
+    const { id } = params;
+    let course = await Course.findOne({ id });
+
+    course &&
+      course.reviews.sort((a, b) =>
+        a.upVotedBy.length - a.downVotedBy.length >
+        b.upVotedBy.length - b.downVotedBy.length
+          ? -1
+          : b.upVotedBy.length - b.downVotedBy.length >
+            a.upVotedBy.length - a.downVotedBy.length
+          ? 1
+          : 0
+      );
+
+    return {
+      props: {
+        course: JSON.parse(JSON.stringify(course)),
+      },
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      props: {
+        course: {},
+      },
+    };
+  }
+};
 
 // export const getStaticPaths = async () => {
 //   connectDb();
