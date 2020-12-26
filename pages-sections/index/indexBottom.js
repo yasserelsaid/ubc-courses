@@ -8,17 +8,7 @@ function top() {
       <Typography variant='body1' component='h2' gutterBottom align='center'>
         Is there a certain course you can't find?{' '}
         <Link href='/add-course'>
-          <a>
-            {' '}
-            <Typography
-              variant='body1'
-              component='p'
-              color='secondary'
-              display='inline'
-            >
-              add it here.{' '}
-            </Typography>
-          </a>
+          <a>add it here. </a>
         </Link>
       </Typography>
     </div>

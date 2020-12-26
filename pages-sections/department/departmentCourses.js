@@ -53,7 +53,12 @@ function departmentCourses({ courses }) {
                       <a className={classes.rowLink}>{course.idName}</a>
                     </TableCell>
                     <TableCell>
-                      <a className={classes.rowLink}>{course.name}</a>
+                      <a
+                        href={`/course/${course.id}`}
+                        className={classes.rowLink}
+                      >
+                        {course.name}
+                      </a>
                     </TableCell>
                     <TableCell align='right'>
                       <span className={classes.numberOfRatings}>

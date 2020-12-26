@@ -6,11 +6,8 @@ import DepartmentCourses from '../pages-sections/department/departmentCourses';
 import connectDb from '../utils/connectDb';
 import Course from '../models/Course';
 import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
 
 export default function department({ courses }) {
-  const router = useRouter();
-  const deptCode = router.query.id;
   const seoDescription = `Most reviewed courses at UBC`;
   const seoTitle = `Most Reviewed`;
 
