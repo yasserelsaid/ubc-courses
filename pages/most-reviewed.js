@@ -42,7 +42,7 @@ export const getStaticProps = async ctx => {
         numberOfReviews: -1,
         overallRating: -1,
       })
-      .limit(100);
+      .limit(150);
 
     return {
       props: {

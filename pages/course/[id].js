@@ -123,7 +123,7 @@ export const getServerSideProps = async ctx => {
 // export const getStaticPaths = async () => {
 //   connectDb();
 
-//   const courses = await Course.find().sort({ numberOfReviews: -1 }).limit(10);
+//   const courses = await Course.find().sort({ numberOfReviews: -1 }).limit(200);
 //   const paths = courses.map(course => ({
 //     params: { id: course.id },
 //   }));
