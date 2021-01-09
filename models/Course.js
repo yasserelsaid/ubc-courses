@@ -104,6 +104,11 @@ const CourseSchema = new mongoose.Schema(
             type: String,
           },
         ],
+        reportedBy: [
+          {
+            type: String,
+          },
+        ],
       },
     ],
   },

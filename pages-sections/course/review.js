@@ -9,6 +9,12 @@ import formatDate from '../../utils/formatDate';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import cookie from 'js-cookie';
+import Button from '@material-ui/core/Button';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 // import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 // import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
@@ -57,6 +63,7 @@ const useStyles = makeStyles(theme => ({
   reviewHeader: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   reviewBody: {
@@ -64,6 +71,11 @@ const useStyles = makeStyles(theme => ({
       display: 'inline-block',
       padding: '15px 20px 5px 0',
     },
+  },
+  dateAndThreeDots: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: '-15px 0',
   },
 }));
 
@@ -86,6 +98,7 @@ function Review({ review }) {
     id,
     upVotedBy,
     downVotedBy,
+    reportedBy,
   } = review;
   const classes = useStyles();
   const deviceId = cookie.get('deviceId');
@@ -96,18 +109,34 @@ function Review({ review }) {
   const [upVote, setUpVote] = useState(false);
   const [downVote, setDownVote] = useState(false);
   const [changingVote, setChangingVote] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [reporting, setReporting] = React.useState(false);
+  const [reported, setReported] = React.useState(false);
+
+  const handleTreeDotsClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
-    setUpVote(upVotedBy.includes(deviceId));
-    setDownVote(downVotedBy.includes(deviceId));
+    setUpVote(upVotedBy && upVotedBy.includes(deviceId));
+    setDownVote(downVotedBy && downVotedBy.includes(deviceId));
+    setReported(reportedBy && reportedBy.includes(deviceId));
   }, []);
 
-  async function handleChangeVote(direction) {
+  async function handleRequest(change) {
     if (changingVote) return;
     setChangingVote(true);
     let valueToChangeVotesBy = 0;
     let whatToChange = '';
-    if (direction === 'up') {
+    if (change === 'report') {
+      if (reported) return;
+      setReporting(true);
+      whatToChange = 'report';
+    } else if (change === 'up') {
       if (upVote) {
         // remove upvote
         valueToChangeVotesBy = -1;
@@ -123,7 +152,7 @@ function Review({ review }) {
       }
       setDownVote(false);
       setUpVote(prevState => !prevState);
-    } else if (direction === 'down') {
+    } else if (change === 'down') {
       if (downVote) {
         // remove downvote
         valueToChangeVotesBy = 1;
@@ -143,7 +172,7 @@ function Review({ review }) {
     }
     setCurrentVotes(prevState => prevState + valueToChangeVotesBy);
     try {
-      const url = '/api/votes';
+      const url = '/api/review';
       const courseId = router.query.id;
       const payload = {
         courseId,
@@ -153,10 +182,12 @@ function Review({ review }) {
       };
 
       await axios.put(url, payload);
+      if (change === 'report') setReported(true);
     } catch (err) {
       console.log(err);
     } finally {
       setChangingVote(false);
+      setReporting(false);
     }
   }
   return (
@@ -164,12 +195,12 @@ function Review({ review }) {
       <div className={classes.vote}>
         <ArrowDropUpIcon
           style={{ color: upVote && 'green', fontSize: '45px' }}
-          onClick={() => handleChangeVote('up')}
+          onClick={() => handleRequest('up')}
         />
         <div>{currentVotes}</div>
         <ArrowDropDownIcon
           style={{ color: downVote && 'red', fontSize: '45px' }}
-          onClick={() => handleChangeVote('down')}
+          onClick={() => handleRequest('down')}
         />
       </div>
       <Paper className={classes.outerPaper}>
@@ -238,9 +269,40 @@ function Review({ review }) {
                 <Typography variant='subtitle2' component='p'>
                   Prof: {professorName} / {term} {year}
                 </Typography>
-                <Typography variant='subtitle2' component='p'>
-                  {formatDate(date)}
-                </Typography>
+                <div className={classes.dateAndThreeDots}>
+                  <Typography variant='subtitle2' component='p'>
+                    {formatDate(date)}
+                  </Typography>
+                  <IconButton
+                    aria-label='more'
+                    aria-controls='long-menu'
+                    aria-haspopup='true'
+                    onClick={handleTreeDotsClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id='simple-menu'
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem>
+                      <Button
+                        onClick={() => handleRequest('report')}
+                        color='secondary'
+                        disabled={reporting || reported}
+                      >
+                        {reported
+                          ? 'Review Reported'
+                          : reporting
+                          ? 'Reporting...'
+                          : 'Report Review'}
+                      </Button>
+                    </MenuItem>
+                  </Menu>
+                </div>
               </div>
               <div className={classes.reviewBody}>
                 <Typography variant='subtitle2' component='p' gutterBottom>

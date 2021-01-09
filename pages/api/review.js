@@ -17,9 +17,29 @@ export default async (req, res) => {
 async function handlePutRequests(req, res) {
   try {
     const { whatToChange, courseId, reviewId, deviceId } = req.body;
-    console.log(deviceId);
-    if (whatToChange === 'upVote') {
-      console.log(1);
+    if (whatToChange === 'report') {
+      const course = await Course.findOneAndUpdate(
+        { id: courseId, 'reviews.id': reviewId },
+        {
+          $addToSet: {
+            'reviews.$.reportedBy': deviceId,
+          },
+        },
+        { new: true }
+      );
+      const review = course.reviews.filter(rev => rev.id === reviewId);
+      console.log(review);
+      if (review[0].reportedBy.length > 3) {
+        await Course.findOneAndUpdate(
+          { id: courseId, 'reviews.id': reviewId },
+          {
+            $pull: {
+              reviews: { id: reviewId },
+            },
+          }
+        );
+      }
+    } else if (whatToChange === 'upVote') {
       await Course.findOneAndUpdate(
         { id: courseId, 'reviews.id': reviewId },
         {
@@ -29,8 +49,6 @@ async function handlePutRequests(req, res) {
         }
       );
     } else if (whatToChange === 'downVote') {
-      console.log(2);
-
       await Course.findOneAndUpdate(
         { id: courseId, 'reviews.id': reviewId },
         {
@@ -40,8 +58,6 @@ async function handlePutRequests(req, res) {
         }
       );
     } else if (whatToChange === 'remove upVote and downVote') {
-      console.log(3);
-
       await Course.findOneAndUpdate(
         { id: courseId, 'reviews.id': reviewId },
         {
@@ -54,8 +70,6 @@ async function handlePutRequests(req, res) {
         }
       );
     } else if (whatToChange === 'remove downVote and upVote') {
-      console.log(4);
-
       await Course.findOneAndUpdate(
         { id: courseId, 'reviews.id': reviewId },
         {
@@ -68,8 +82,6 @@ async function handlePutRequests(req, res) {
         }
       );
     } else if (whatToChange === 'remove upVote') {
-      console.log(5);
-
       await Course.findOneAndUpdate(
         { id: courseId, 'reviews.id': reviewId },
         {
@@ -79,8 +91,6 @@ async function handlePutRequests(req, res) {
         }
       );
     } else if (whatToChange === 'remove downVote') {
-      console.log(6);
-
       await Course.findOneAndUpdate(
         { id: courseId, 'reviews.id': reviewId },
         {
@@ -91,7 +101,7 @@ async function handlePutRequests(req, res) {
       );
     }
 
-    res.status(200).send('votes updated successfully');
+    res.status(200).send('review updated successfully');
   } catch (err) {
     console.log(err);
     res.status(403).send(err.message);
