@@ -29,7 +29,7 @@ async function handlePutRequests(req, res) {
       );
       const review = course.reviews.filter(rev => rev.id === reviewId);
       console.log(review);
-      if (review[0].reportedBy.length > 3) {
+      if (review[0].reportedBy.length > 11) {
         await Course.findOneAndUpdate(
           { id: courseId, 'reviews.id': reviewId },
           {
