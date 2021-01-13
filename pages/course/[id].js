@@ -14,11 +14,24 @@ import connectDb from '../../utils/connectDb';
 
 export default function course({ course }) {
   const router = useRouter();
+  const id = router.query.id;
+  const [reviews, setReviews] = useState(course ? course.reviews : []);
+  if (!course || !course.idName)
+    return (
+      <Container maxWidth='md'>
+        <Box my={4} alignItems='center'>
+          <Typography variant='h4' component='h1' gutterBottom align='center'>
+            Course {id} is not available, you can add it{' '}
+            <Link href='/add-course'>
+              <a>here</a>
+            </Link>
+          </Typography>
+        </Box>
+      </Container>
+    );
   // const [courseIdName, setCourseIdName] = useState('');
   // const [courseName, setCourseName] = useState('');
-  const [reviews, setReviews] = useState(course.reviews);
   // const [loading, setLoading] = useState(true);
-  const id = router.query.id;
 
   // async function getCourseInfo() {
   //   setLoading(true);
@@ -60,27 +73,13 @@ export default function course({ course }) {
       />
       <Container maxWidth='md'>
         <Box my={4} alignItems='center'>
-          {course.idName ? (
-            <>
-              <CourseTop
-                courseIdName={course.idName}
-                courseName={course.name}
-              />
-              <Reviews reviews={reviews} />
-              <LeaveAReview
-                reviewedBy={course.reviewedBy}
-                setReviews={setReviews}
-                noReviews={reviews.length === 0}
-              />
-            </>
-          ) : (
-            <Typography variant='h4' component='h1' gutterBottom align='center'>
-              Course {id} is not available, you can add it{' '}
-              <Link href='/add-course'>
-                <a>here</a>
-              </Link>
-            </Typography>
-          )}
+          <CourseTop courseIdName={course.idName} courseName={course.name} />
+          <Reviews reviews={reviews} />
+          <LeaveAReview
+            reviewedBy={course.reviewedBy}
+            setReviews={setReviews}
+            noReviews={reviews.length === 0}
+          />
         </Box>
       </Container>
     </>
