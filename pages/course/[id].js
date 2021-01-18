@@ -65,7 +65,7 @@ export default function course({ course }) {
         description={seoDescription}
         openGraph={{
           type: 'website',
-          url: 'https://UBCcourses.com/',
+          url: 'https://ratemycoursesubc.com/',
           title: course.idName,
           description: seoDescription,
           site_name: 'UBC Course Reviews',
