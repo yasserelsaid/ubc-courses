@@ -36,6 +36,11 @@ export default class MyDocument extends Document {
       `,
             }}
           />
+          <script
+            data-ad-client='ca-pub-9351737408787682'
+            async
+            src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+          ></script>
           {/* <script
             data-name='BMC-Widget'
             src='https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js'
