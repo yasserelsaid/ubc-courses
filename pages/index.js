@@ -40,10 +40,13 @@ export const getStaticProps = async ctx => {
     connectDb();
 
     const uniqueDepts = await Course.find().distinct('deptCode');
-    const profs = await Course.find().distinct('reviews.professorName');
+    let profs = await Course.find().distinct('reviews.professorName');
     uniqueDepts.sort();
+    profs = profs.map(prof => {
+      return prof.trim();
+    });
+    profs = [...new Set(profs)];
     profs.sort();
-
     return {
       props: {
         depts: JSON.parse(JSON.stringify(uniqueDepts)),

@@ -78,21 +78,11 @@ function inputs({ depts, profs }) {
           ))}
         </Autocomplete>
       </div>
+
       <Typography variant='h5' component='h1' gutterBottom align='center'>
         OR
       </Typography>
-
-      <Typography variant='h5' component='h1' gutterBottom align='center'>
-        Take a look at the{' '}
-        <Link href='/most-reviewed'>
-          <a>most reviewed courses</a>
-        </Link>
-      </Typography>
-
-      {/* <Typography variant='h5' component='h1' gutterBottom align='center'>
-        OR
-      </Typography>
-       <div className={classes.input}>
+      <div className={classes.input}>
         <Autocomplete
           getOptionLabel={prof => prof}
           options={profs}
@@ -114,7 +104,17 @@ function inputs({ depts, profs }) {
               </MenuItem>
             ))}
         </Autocomplete>
-      </div> */}
+      </div>
+      <Typography variant='h5' component='h1' gutterBottom align='center'>
+        OR
+      </Typography>
+
+      <Typography variant='h5' component='h1' gutterBottom align='center'>
+        Take a look at the{' '}
+        <Link href='/most-reviewed'>
+          <a>most reviewed courses</a>
+        </Link>
+      </Typography>
     </div>
   );
 }

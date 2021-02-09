@@ -99,6 +99,7 @@ function Review({ review }) {
     upVotedBy,
     downVotedBy,
     reportedBy,
+    courseIdName,
   } = review;
   const classes = useStyles();
   const deviceId = cookie.get('deviceId');
@@ -320,6 +321,12 @@ function Review({ review }) {
                       {advice}
                     </Typography>
                   </>
+                )}
+
+                {courseIdName && (
+                  <span>
+                    Course: <strong>{courseIdName}</strong>
+                  </span>
                 )}
                 {grade && (
                   <span>
