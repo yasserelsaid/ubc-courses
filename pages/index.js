@@ -24,6 +24,11 @@ export default function Index({ depts, profs }) {
         }}
       />
       <Container maxWidth='sm'>
+        <AdSense.Google
+          client='ca-pub-9351737408787682'
+          slot='8693404703'
+          format='auto'
+        />
         <Box my={4} alignItems='center'>
           <IndexTop />
           <Inputs depts={depts} profs={profs} />
@@ -35,18 +40,6 @@ export default function Index({ depts, profs }) {
           format='auto'
         />
       </Container>
-      <AdSense.Google
-        client='ca-pub-9351737408787682'
-        slot='3609981874'
-        format='auto'
-        style={{ float: 'left' }}
-      />
-      <AdSense.Google
-        client='ca-pub-9351737408787682'
-        slot='3609981874'
-        format='auto'
-        style={{ float: 'right' }}
-      />
     </>
   );
 }
