@@ -24,7 +24,6 @@ async function handleGetRequests(req, res) {
   try {
     connectDb();
     const { id } = req.query;
-    console.log(id);
 
     const course = await Course.findOne({ id });
 
@@ -73,8 +72,6 @@ async function handlePutRequests(req, res) {
     const { overallRating, numberOfReviews } = await Course.findOne({
       id,
     });
-
-    console.log(overallRating, numberOfReviews, review.fullRating);
 
     const newOverallRating = (
       (overallRating * numberOfReviews + review.fullRating) /

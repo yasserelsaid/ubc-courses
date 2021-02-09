@@ -65,14 +65,12 @@ export const getStaticProps = async ctx => {
     connectDb();
     const { params } = ctx;
     const { id } = params;
-    console.log(id);
     const courses = await Course.find({
       'reviews.professorName': id,
     });
 
     const arrayOfReviewArrays = courses.map(course => {
       const courseIdName = course.idName;
-      console.log(course);
       const profReviews = course.reviews.filter(
         review => review.professorName === id
       );
@@ -83,7 +81,6 @@ export const getStaticProps = async ctx => {
     });
     // flatten reviews
     const reviews = [].concat.apply([], arrayOfReviewArrays);
-    console.log(reviews);
 
     return {
       props: {
