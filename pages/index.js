@@ -29,11 +29,23 @@ export default function Index({ depts, profs }) {
           <Inputs depts={depts} profs={profs} />
           <IndexBottom />
         </Box>
+        <AdSense.Google
+          client='ca-pub-9351737408787682'
+          slot='8693404703'
+          format='auto'
+        />
       </Container>
       <AdSense.Google
         client='ca-pub-9351737408787682'
-        slot='8693404703'
+        slot='3609981874'
         format='auto'
+        style={{ float: 'left' }}
+      />
+      <AdSense.Google
+        client='ca-pub-9351737408787682'
+        slot='3609981874'
+        format='auto'
+        style={{ float: 'right' }}
       />
     </>
   );
