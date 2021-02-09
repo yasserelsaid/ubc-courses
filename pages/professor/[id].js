@@ -54,7 +54,7 @@ export const getStaticPaths = async () => {
   });
   profs = [...new Set(profs)];
 
-  const paths = professors.map(prof => ({
+  const paths = profs.map(prof => ({
     params: { id: prof },
   }));
 
