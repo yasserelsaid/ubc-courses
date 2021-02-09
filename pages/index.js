@@ -30,7 +30,11 @@ export default function Index({ depts, profs }) {
           <IndexBottom />
         </Box>
       </Container>
-      <AdSense.Google client='ca-pub-9351737408787682' slot='7806394673' />
+      <AdSense.Google
+        client='ca-pub-9351737408787682'
+        slot='8693404703'
+        format='auto'
+      />
     </>
   );
 }

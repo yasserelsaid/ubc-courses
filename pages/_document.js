@@ -41,6 +41,7 @@ export default class MyDocument extends Document {
             async
             src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
           ></script>
+
           {/* <script
             data-name='BMC-Widget'
             src='https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js'
