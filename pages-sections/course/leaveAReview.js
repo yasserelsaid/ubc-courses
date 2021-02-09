@@ -172,7 +172,11 @@ function LeaveAReview({ setReviews, noReviews, reviewedBy }) {
       const url = '/api/courses';
       const { id } = router.query;
       const payload = {
-        review: { fullRating, ...review },
+        review: {
+          fullRating,
+          ...review,
+          professorName: review.professorName.trim(),
+        },
         id,
         deviceId,
       };
