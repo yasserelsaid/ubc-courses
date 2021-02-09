@@ -14,7 +14,6 @@ export default function professor({ reviews }) {
   const professorName = router.query.id;
   const seoDescription = `Reviews of courses taught by professor ${professorName} at UBC `;
   const seoTitle = `${professorName} Reviews`;
-
   return (
     <>
       {/* <h1>This page is not yet available</h1> */}
@@ -32,11 +31,11 @@ export default function professor({ reviews }) {
       <Container maxWidth='md'>
         <Box my={4} alignItems='center'>
           <ProfessorTop />
-          {reviews ? (
+          {reviews && reviews.length > 0 ? (
             <Reviews reviews={reviews} />
           ) : (
             <Typography variant='h4' component='h1' gutterBottom align='center'>
-              Professor {router.query.id} is does not have any reviews yet
+              Professor {router.query.id} does not have any reviews yet
             </Typography>
           )}
         </Box>
@@ -48,15 +47,20 @@ export default function professor({ reviews }) {
 export const getStaticPaths = async () => {
   connectDb();
 
-  let profs = await Course.find().distinct('reviews.professorName');
-  profs = profs.map(prof => {
-    return prof.trim();
-  });
-  profs = [...new Set(profs)];
+  // let profs = await Course.find().distinct('reviews.professorName');
+  // profs = profs.map(prof => {
+  //   return prof.trim();
+  // });
+  // profs = [...new Set(profs)];
 
-  const paths = profs.map(prof => ({
-    params: { id: prof },
-  }));
+  // const paths = profs.map(prof => ({
+  //   params: { id: prof },
+  // }));
+  const paths = [
+    {
+      params: { id: 'Alym Almani' },
+    },
+  ];
 
   return {
     paths,
