@@ -48,7 +48,11 @@ export default function professor({ reviews }) {
 export const getStaticPaths = async () => {
   connectDb();
 
-  const professors = await Course.find().distinct('reviews.professorName');
+  let profs = await Course.find().distinct('reviews.professorName');
+  profs = profs.map(prof => {
+    return prof.trim();
+  });
+  profs = [...new Set(profs)];
 
   const paths = professors.map(prof => ({
     params: { id: prof },
