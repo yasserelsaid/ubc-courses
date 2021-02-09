@@ -8,7 +8,7 @@ import connectDb from '../utils/connectDb';
 import Course from '../models/Course';
 import { NextSeo } from 'next-seo';
 
-// import AdSense from 'react-adsense';
+import AdSense from 'react-adsense';
 
 export default function Index({ depts, profs }) {
   return (
@@ -30,11 +30,11 @@ export default function Index({ depts, profs }) {
           <IndexBottom />
         </Box>
       </Container>
-      {/* <AdSense.Google
+      <AdSense.Google
         client='ca-pub-9351737408787682'
         slot='8693404703'
         format='auto'
-      /> */}
+      />
     </>
   );
 }
