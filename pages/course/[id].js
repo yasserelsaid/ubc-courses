@@ -68,7 +68,7 @@ export default function course({ course }) {
           url: 'https://ratemycoursesubc.com/',
           title: course.idName,
           description: seoDescription,
-          site_name: 'UBC Course Reviews',
+          site_name: 'Rate My Courses UBC',
         }}
       />
       <Container maxWidth='md'>

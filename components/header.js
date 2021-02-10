@@ -83,7 +83,7 @@ export default function SearchAppBar() {
 
           <Typography className={classes.title} variant='h6' noWrap>
             <Link href='/'>
-              <a>UBC Course Reviews</a>
+              <a>Rate My Courses UBC</a>
             </Link>
           </Typography>
         </Toolbar>
