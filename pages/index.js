@@ -15,11 +15,11 @@ export default function Index({ depts, profs }) {
     <>
       <NextSeo
         title='Rate My Courses UBC'
-        description='UBC Courses is the place to see reviews and ratings of courses and professors at UBC '
+        description='Rate My Courses UBC is the place to see reviews and ratings of courses and professors at UBC '
         openGraph={{
-          url: 'https://UBCcourses.com/',
-          title: 'UBC Courses',
-          description: 'UBC  Course Reviews and Ratings',
+          url: 'https://ratemycoursesubc.com/',
+          title: 'Rate My Courses UBC',
+          description: 'UBC Course Reviews and Ratings',
           site_name: 'Rate My Courses UBC',
         }}
       />

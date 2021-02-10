@@ -22,7 +22,7 @@ export default function department({ courses }) {
         description={seoDescription}
         openGraph={{
           type: 'website',
-          url: 'https://UBCcourses.com/',
+          url: 'https://ratemycoursesubc.com/',
           title: seoTitle,
           description: seoDescription,
           site_name: 'Rate My Courses UBC',
