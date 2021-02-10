@@ -6,6 +6,7 @@ import DepartmentCourses from '../pages-sections/department/departmentCourses';
 import connectDb from '../utils/connectDb';
 import Course from '../models/Course';
 import { NextSeo } from 'next-seo';
+import AdSense from 'react-adsense';
 
 export default function department({ courses }) {
   const seoDescription = `Most reviewed courses at UBC`;
@@ -25,6 +26,11 @@ export default function department({ courses }) {
         }}
       />
       <Container maxWidth='md'>
+        <AdSense.Google
+          client='ca-pub-9351737408787682'
+          slot='8693404703'
+          format='auto'
+        />
         <Box my={4} alignItems='center'>
           <DepartmentTop />
           <DepartmentCourses courses={courses} />

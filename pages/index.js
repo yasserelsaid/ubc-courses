@@ -24,11 +24,6 @@ export default function Index({ depts, profs }) {
         }}
       />
       <Container maxWidth='sm'>
-        <AdSense.Google
-          client='ca-pub-9351737408787682'
-          slot='8693404703'
-          format='auto'
-        />
         <Box my={4} alignItems='center'>
           <IndexTop />
           <Inputs depts={depts} profs={profs} />

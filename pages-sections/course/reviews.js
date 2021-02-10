@@ -16,16 +16,20 @@ function Reviews({ reviews }) {
     return (
       reviews.length > 0 && (
         <div>
-          {reviews.map(review => (
-            <>
+          {reviews.map((review, index) => {
+            return index % 2 === 0 ? (
               <Review review={review} key={review.id} />
-              <AdSense.Google
-                client='ca-pub-9351737408787682'
-                slot='8693404703'
-                format='auto'
-              />
-            </>
-          ))}
+            ) : (
+              <>
+                <Review review={review} key={review.id} />
+                <AdSense.Google
+                  client='ca-pub-9351737408787682'
+                  slot='8693404703'
+                  format='auto'
+                />
+              </>
+            );
+          })}
         </div>
       )
     );
